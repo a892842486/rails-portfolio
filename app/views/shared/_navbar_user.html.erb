@@ -1,0 +1,44 @@
+<div class="relative" data-controller="dropdown">
+  <button
+    type="button"
+    data-action="click->dropdown#toggle"
+    class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-gray-200 transition hover:bg-slate-800 hover:text-white focus:outline-none">
+
+    <span class="max-w-[220px] truncate">
+      Hi, <%= current_user.email %>
+    </span>
+
+    <svg
+      class="h-4 w-4 flex-shrink-0 transition duration-150"
+      data-dropdown-target="icon"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor">
+      <path stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <div
+    data-dropdown-target="menu"
+    class="absolute right-0 top-full z-50 hidden pt-2">
+    <div class="w-48 rounded-xl border border-gray-200 bg-white py-2 shadow-xl">
+      <%= link_to "#",
+          class: "flex items-center px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-50" do %>
+        <i class="fa-solid fa-receipt w-5 mr-2 text-gray-400 text-center"></i>
+        <%= t("navbar.xxx") %>
+      <% end %>
+
+      <%= link_to destroy_user_session_path,
+          data: { turbo_method: :delete },
+          class: "flex items-center px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-50" do %>
+          <i class="fa-solid fa-right-from-bracket w-5 mr-2 text-gray-400 text-center"></i>
+          登出
+      <% end %>
+
+    </div>
+  </div>
+  
+</div>
