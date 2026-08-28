@@ -31,12 +31,12 @@
         <%= t("navbar.xxx") %>
       <% end %>
 
-      <%= link_to destroy_user_session_path,
-          data: { turbo_method: :delete },
-          class: "flex items-center px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-50" do %>
-          <i class="fa-solid fa-right-from-bracket w-5 mr-2 text-gray-400 text-center"></i>
-          登出
-      <% end %>
+        <%= link_to destroy_user_session_path,
+            data: { turbo_method: :delete },
+            class: "block px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-50" do %>
+            <i class="fa-solid fa-right-from-bracket mr-2"></i>
+            登出
+        <% end %>
 
     </div>
   </div>
