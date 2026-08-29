@@ -10,7 +10,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_06_064957) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_28_062419) do
+  create_table "links", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "label"
+    t.integer "linkable_id"
+    t.string "linkable_type"
+    t.integer "position"
+    t.datetime "updated_at", null: false
+    t.string "url"
+    t.index ["linkable_type", "linkable_id"], name: "index_links_on_linkable"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "contact_email"
+    t.datetime "created_at", null: false
+    t.string "display_name"
+    t.text "introduction"
+    t.string "job_title"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "project_skills", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "position"
+    t.integer "project_id"
+    t.integer "skill_id"
+    t.datetime "updated_at", null: false
+    t.index ["project_id", "skill_id"], name: "index_project_skills_on_project_id_and_skill_id", unique: true
+    t.index ["project_id"], name: "index_project_skills_on_project_id"
+    t.index ["skill_id"], name: "index_project_skills_on_skill_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "name"
+    t.string "summary"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.integer "position"
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_skills_on_name", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
