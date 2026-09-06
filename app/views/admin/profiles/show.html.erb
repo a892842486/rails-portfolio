@@ -1,0 +1,28 @@
+<h1>Profile</h1>
+
+<p>
+  <strong>Name:</strong>
+  <%= @profile.display_name %>
+</p>
+
+<p>
+  <strong>Job Title:</strong>
+  <%= @profile.job_title %>
+</p>
+
+<p>
+  <strong>Introduction:</strong>
+  <%= @profile.introduction %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @profile.contact_email %>
+</p>
+
+<%= link_to "Edit Profile", edit_admin_profile_path %>
+
+<%= button_to "Delete Profile",
+              admin_profile_path,
+              method: :delete,
+              data: { turbo_confirm: "Are you sure?" } %>

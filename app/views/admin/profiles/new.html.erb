@@ -1,0 +1,27 @@
+<h1>New Profile</h1>
+
+<%= form_with model: @profile, url: admin_profile_path do |form| %>
+  <div>
+    <%= form.label :display_name %>
+    <%= form.text_field :display_name %>
+  </div>
+
+  <div>
+    <%= form.label :job_title %>
+    <%= form.text_field :job_title %>
+  </div>
+
+  <div>
+    <%= form.label :introduction %>
+    <%= form.text_area :introduction %>
+  </div>
+
+  <div>
+    <%= form.label :contact_email %>
+    <%= form.email_field :contact_email %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
