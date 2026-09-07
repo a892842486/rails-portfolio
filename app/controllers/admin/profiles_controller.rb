@@ -1,7 +1,7 @@
 class Admin::ProfilesController < ApplicationController
-    def show
-        @profile = Profile.first
+    before_action :set_profile, only: %i[show edit update destroy]
 
+    def show
         redirect_to new_admin_profile_path unless @profile
     end
 
@@ -29,12 +29,9 @@ class Admin::ProfilesController < ApplicationController
     end
 
     def edit
-        @profile = Profile.first
     end
 
     def update
-        @profile = Profile.first
-
         if @profile.update(profile_params)
             redirect_to admin_profile_path
         else
@@ -43,13 +40,16 @@ class Admin::ProfilesController < ApplicationController
     end
 
     def destroy
-        @profile = Profile.first
         @profile.destroy
 
         redirect_to new_admin_profile_path
     end
 
     private
+
+    def set_profile
+        @profile = Profile.first
+    end
 
     def profile_params
         params.require(:profile).permit(
