@@ -1,0 +1,16 @@
+<% if @skill.errors.any? %>
+  <ul>
+    <% @skill.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: [:admin, @skill] do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <%= form.submit %>
+<% end %>

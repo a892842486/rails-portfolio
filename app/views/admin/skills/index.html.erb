@@ -1,0 +1,10 @@
+<h1>Skills</h1>
+<%= link_to "New Skill", new_admin_skill_path %>
+
+<% @skills.each do |skill| %>
+  <p><%= skill.name %></p>
+
+  <%= button_to "Delete",
+                admin_skill_path(skill),
+                method: :delete %>
+<% end %>

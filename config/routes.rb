@@ -8,5 +8,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resource :profile
+    resources :skills
   end
 end
