@@ -40,6 +40,17 @@ class Admin::SkillsController < ApplicationController
     redirect_to admin_skills_path
   end
 
+  def reorder
+    skill_ids = params[:skill_ids]
+
+    Skill.transaction do
+      skill_ids.each_with_index do |skill_id, index|
+        skill = Skill.find(skill_id)
+        skill.update!(position: index + 1)
+      end
+    end
+  end
+
   private
 
   def skill_params

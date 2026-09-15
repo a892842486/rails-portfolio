@@ -1,10 +1,20 @@
 <h1>Skills</h1>
 <%= link_to "New Skill", new_admin_skill_path %>
 
-<% @skills.each do |skill| %>
-  <p><%= skill.name %></p>
+<div id="skills" data-controller="skill-sort">
+  <% @skills.each do |skill| %>
+    <div class="flex items-center gap-2">
+      <p data-skill-id="<%= skill.id %>"
+        draggable="true"
+        data-action="dragstart->skill-sort#dragstart
+                    dragover->skill-sort#dragover
+                    drop->skill-sort#drop">
+        <%= skill.name %>
+      </p>
 
-  <%= button_to "Delete",
-                admin_skill_path(skill),
-                method: :delete %>
-<% end %>
+      <%= button_to "Delete",
+                    admin_skill_path(skill),
+                    method: :delete %>
+      </div>
+  <% end %>
+</div>
