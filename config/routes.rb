@@ -12,5 +12,7 @@ Rails.application.routes.draw do
     resources :skills do
       patch :reorder, on: :collection
     end
+
+    resources :projects
   end
 end

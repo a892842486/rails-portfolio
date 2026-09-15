@@ -1,0 +1,19 @@
+<h1>Projects</h1>
+
+<%= link_to "New Project", new_admin_project_path %>
+
+<div>
+  <% @projects.each do |project| %>
+    <div>
+      <h2><%= project.name %></h2>
+      <p><%= project.summary %></p>
+      <p><%= project.description %></p>
+
+    <%= link_to "Edit", edit_admin_project_path(project) %>
+
+    <%= button_to "Delete",
+                  admin_project_path(project),
+                  method: :delete %>
+      </div>
+  <% end %>
+</div>
