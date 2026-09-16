@@ -41,6 +41,11 @@ class Admin::ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:name, :summary, :description)
+    params.require(:project).permit(
+      :name,
+      :summary,
+      :description,
+      skill_ids: []
+      )
   end
 end

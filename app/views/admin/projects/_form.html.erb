@@ -14,5 +14,10 @@
     <%= form.text_area :description %>
   </div>
 
+  <div>
+    <%= form.label :skills %>
+    <%= form.collection_check_boxes :skill_ids, Skill.order(:position), :id, :name %>
+  </div>
+
   <%= form.submit %>
 <% end %>
