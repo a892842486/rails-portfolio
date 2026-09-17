@@ -4,6 +4,8 @@ class Project < ApplicationRecord
 
     has_many :links, as: :linkable, dependent: :destroy
 
+    accepts_nested_attributes_for :links, allow_destroy: true
+
     validates :name, presence: true
     validates :summary, presence: true
     validates :description, presence: true

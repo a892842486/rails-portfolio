@@ -5,6 +5,7 @@ class Admin::ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    @project.links.build
   end
 
   def create
@@ -45,7 +46,8 @@ class Admin::ProjectsController < ApplicationController
       :name,
       :summary,
       :description,
-      skill_ids: []
+      skill_ids: [],
+      links_attributes: [ :id, :label, :url, :_destroy ]
       )
   end
 end

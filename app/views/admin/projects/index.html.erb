@@ -9,6 +9,10 @@
       <p><%= project.summary %></p>
       <p><%= project.description %></p>
 
+      <% project.links.each do |link| %>
+        <%= link_to link.label, link.url %>
+      <% end %>
+
     <%= link_to "Edit", edit_admin_project_path(project) %>
 
     <%= button_to "Delete",

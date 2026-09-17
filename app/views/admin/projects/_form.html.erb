@@ -19,5 +19,20 @@
     <%= form.collection_check_boxes :skill_ids, Skill.order(:position), :id, :name %>
   </div>
 
+  <div>
+    <%= form.fields_for :links do |link_form| %>
+      <%= link_form.hidden_field :id %>
+
+      <%= link_form.label :label %>
+      <%= link_form.text_field :label %>
+
+      <%= link_form.label :url %>
+      <%= link_form.text_field :url %>
+
+      <%= link_form.check_box :_destroy %>
+      <%= link_form.label :_destroy, "Delete" %>
+    <% end %>
+  </div>
+
   <%= form.submit %>
 <% end %>
