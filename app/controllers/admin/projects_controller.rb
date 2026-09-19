@@ -25,7 +25,9 @@ class Admin::ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
 
-    if @project.update(project_params)
+    if @project.update(project_params.except(:images))
+      @project.images.attach(params[:project][:images]) if params[:project][:images].present?
+
       redirect_to admin_projects_path
     else
       render :edit, status: :unprocessable_entity
@@ -39,6 +41,14 @@ class Admin::ProjectsController < ApplicationController
     redirect_to admin_projects_path
   end
 
+  def destroy_image
+    @project = Project.find(params[:id])
+    image = @project.images.attachments.find(params[:image_id])
+    image.purge
+
+    redirect_to edit_admin_project_path(@project)
+  end
+
   private
 
   def project_params
@@ -47,7 +57,8 @@ class Admin::ProjectsController < ApplicationController
       :summary,
       :description,
       skill_ids: [],
-      links_attributes: [ :id, :label, :url, :_destroy ]
+      links_attributes: [ :id, :label, :url, :_destroy ],
+      images: []
       )
   end
 end

@@ -34,5 +34,22 @@
     <% end %>
   </div>
 
+  <div>
+    <%= form.label :images %>
+    <%= form.file_field :images, multiple: true %>
+  </div>
+
   <%= form.submit %>
+  
+<% end %>
+
+<% project.images.each do |image| %>
+  <div>
+    <%= image_tag image, width: 300 %>
+
+    <%= button_to "Delete",
+                  destroy_image_admin_project_path(project),
+                  method: :delete,
+                  params: { image_id: image.id } %>
+  </div>
 <% end %>

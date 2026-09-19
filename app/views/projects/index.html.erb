@@ -1,0 +1,33 @@
+<div class="bg-gray-50 p-8">
+  <div class="mx-auto max-w-6xl">
+
+    <h1 class="mb-8 text-3xl font-bold">Projects</h1>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      <% @projects.each do |project| %>
+        <div class="rounded-xl bg-white p-6 shadow ring-1 ring-gray-200 transition-shadow hover:shadow-md">
+          <h2 class="text-xl font-semibold">
+            <%= link_to project.name, project_path(project), class: "hover:underline" %>
+          </h2>
+
+          <p class="mt-2 text-gray-600"><%= project.summary %></p>
+
+          <div class="mt-3 flex flex-wrap gap-2">
+            <% project.skills.each do |skill| %>
+              <span class="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-600">
+                <%= skill.name %>
+              </span>
+            <% end %>
+          </div>
+
+          <% if project.images.attached? %>
+            <%= link_to project_path(project) do %>
+              <%= image_tag project.images.first, class: "mt-4 w-full rounded-lg" %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>

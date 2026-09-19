@@ -1,0 +1,27 @@
+<h1><%= @project.name %></h1>
+
+<p><%= @project.summary %></p>
+
+<p><%= @project.description %></p>
+
+<h2>Skills</h2>
+
+<ul>
+  <% @project.skills.each do |skill| %>
+    <li><%= skill.name %></li>
+  <% end %>
+</ul>
+
+<h2>Links</h2>
+
+<ul>
+  <% @project.links.each do |link| %>
+    <li>
+      <%= link_to link.label, link.url %>
+    </li>
+  <% end %>
+</ul>
+
+<% @project.images.each do |image| %>
+  <%= image_tag image, width: 800 %>
+<% end %>

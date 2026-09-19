@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :projects, only: [ :index, :show ]
+
   devise_for :users
   get "welcome/index"
 
@@ -13,6 +15,8 @@ Rails.application.routes.draw do
       patch :reorder, on: :collection
     end
 
-    resources :projects
+    resources :projects do
+      delete :destroy_image, on: :member
+    end
   end
 end
