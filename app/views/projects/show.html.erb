@@ -34,7 +34,7 @@
     <h2 class="mt-10 text-2xl font-semibold">Screenshots</h2>
 
     <div class="mt-4 space-y-6">
-      <% @project.project_images.order(:position).each do |project_image| %>
+      <% @project.project_images.order(:created_at).each do |project_image| %>
         <% if project_image.image.attached? %>
           <div>
             <%= image_tag project_image.image, class: "w-full max-w-4xl rounded-lg" %>
