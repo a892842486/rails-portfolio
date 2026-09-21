@@ -34,22 +34,61 @@
     <% end %>
   </div>
 
-  <div>
-    <%= form.label :images %>
-    <%= form.file_field :images, multiple: true %>
+  <div data-controller="project-images">
+
+    <div data-project-images-target="list">
+      <%= form.fields_for :project_images do |image_form| %>
+        <div>
+          <%= image_form.hidden_field :id %>
+
+          <% if image_form.object.persisted? && image_form.object.image.attached? %>
+            <%= image_tag image_form.object.image, width: 300 %>
+          <% end %>
+
+          <%= image_form.label :caption, "Caption" %>
+          <%= image_form.text_field :caption %>
+
+          <%= image_form.label :position, "Position" %>
+          <%= image_form.number_field :position %>
+
+          <%= image_form.label :image, "Image" %>
+          <%= image_form.file_field :image %>
+
+          <%= image_form.check_box :_destroy %>
+          <%= image_form.label :_destroy, "Delete" %>
+        </div>
+      <% end %>
+    </div>
+
+
+    <template data-project-images-target="template">
+      <%= form.fields_for :project_images, ProjectImage.new, child_index: "NEW_RECORD" do |image_form| %>
+        <div>
+          <%= image_form.hidden_field :id %>
+
+          <%= image_form.label :caption, "Caption" %>
+          <%= image_form.text_field :caption %>
+
+          <%= image_form.label :position, "Position" %>
+          <%= image_form.number_field :position %>
+
+          <%= image_form.label :image, "Image" %>
+          <%= image_form.file_field :image %>
+
+          <%= image_form.check_box :_destroy %>
+          <%= image_form.label :_destroy, "Delete" %>
+        </div>
+      <% end %>
+    </template>
+
+    <button type="button"
+            id="add-project-image"
+            data-action="click->project-images#add">
+      Add Project Image
+    </button>
+
   </div>
 
   <%= form.submit %>
   
-<% end %>
-
-<% project.images.each do |image| %>
-  <div>
-    <%= image_tag image, width: 300 %>
-
-    <%= button_to "Delete",
-                  destroy_image_admin_project_path(project),
-                  method: :delete,
-                  params: { image_id: image.id } %>
-  </div>
 <% end %>

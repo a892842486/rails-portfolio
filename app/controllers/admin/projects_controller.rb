@@ -6,6 +6,7 @@ class Admin::ProjectsController < ApplicationController
   def new
     @project = Project.new
     @project.links.build
+    @project.project_images.build
   end
 
   def create
@@ -25,9 +26,7 @@ class Admin::ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
 
-    if @project.update(project_params.except(:images))
-      @project.images.attach(params[:project][:images]) if params[:project][:images].present?
-
+    if @project.update(project_params)
       redirect_to admin_projects_path
     else
       render :edit, status: :unprocessable_entity
@@ -41,14 +40,6 @@ class Admin::ProjectsController < ApplicationController
     redirect_to admin_projects_path
   end
 
-  def destroy_image
-    @project = Project.find(params[:id])
-    image = @project.images.attachments.find(params[:image_id])
-    image.purge
-
-    redirect_to edit_admin_project_path(@project)
-  end
-
   private
 
   def project_params
@@ -58,6 +49,7 @@ class Admin::ProjectsController < ApplicationController
       :description,
       skill_ids: [],
       links_attributes: [ :id, :label, :url, :_destroy ],
+      project_images_attributes: [ :id, :caption, :position, :_destroy ],
       images: []
       )
   end

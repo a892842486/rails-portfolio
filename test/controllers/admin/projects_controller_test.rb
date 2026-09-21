@@ -13,14 +13,14 @@ class Admin::ProjectsControllerTest < ActionDispatch::IntegrationTest
 
     post admin_projects_path, params: {
       project: {
-        name: "Test Project",
+        name: "Created Project",
         summary: "Test summary",
         description: "Test description",
         skill_ids: [ ruby.id, rails.id ]
       }
     }
 
-    project = Project.find_by(name: "Test Project")
+    project = Project.find_by(name: "Created Project")
 
     assert_equal [ ruby.id, rails.id ].sort, project.skill_ids.sort
   end

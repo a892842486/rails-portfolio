@@ -13,10 +13,6 @@
         <%= link_to link.label, link.url %>
       <% end %>
 
-      <% project.images.each do |image| %>
-        <%= image_tag image %>
-      <% end %>
-
       <%= link_to "Edit", edit_admin_project_path(project) %>
 
       <%= button_to "Delete",

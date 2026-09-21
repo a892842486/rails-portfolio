@@ -15,8 +15,6 @@ Rails.application.routes.draw do
       patch :reorder, on: :collection
     end
 
-    resources :projects do
-      delete :destroy_image, on: :member
-    end
+    resources :projects
   end
 end

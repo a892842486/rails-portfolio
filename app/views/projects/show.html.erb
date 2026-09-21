@@ -1,27 +1,51 @@
-<h1><%= @project.name %></h1>
+<div class="bg-gray-50 p-8">
+  <div class="mx-auto max-w-6xl">
 
-<p><%= @project.summary %></p>
+    <h1 class="text-4xl font-bold">
+      <%= @project.name %>
+    </h1>
 
-<p><%= @project.description %></p>
+    <p class="mt-3 text-lg text-gray-600">
+      <%= @project.summary %>
+    </p>
 
-<h2>Skills</h2>
+    <h2 class="mt-10 text-2xl font-semibold">About this project</h2>
 
-<ul>
-  <% @project.skills.each do |skill| %>
-    <li><%= skill.name %></li>
-  <% end %>
-</ul>
+    <p class="mt-8 max-w-3xl text-gray-700 leading-7">
+      <%= @project.description %>
+    </p>
 
-<h2>Links</h2>
+    <h2 class="mt-10 text-2xl font-semibold">Skills</h2>
 
-<ul>
-  <% @project.links.each do |link| %>
-    <li>
-      <%= link_to link.label, link.url %>
-    </li>
-  <% end %>
-</ul>
+    <div class="mt-3 flex flex-wrap gap-2">
+      <% @project.skills.each do |skill| %>
+        <%= render "shared/badge", text: skill.name %>
+      <% end %>
+    </div>
 
-<% @project.images.each do |image| %>
-  <%= image_tag image, width: 800 %>
-<% end %>
+    <h2 class="mt-10 text-2xl font-semibold">Links</h2>
+
+    <div class="mt-3 mb-8 flex flex-wrap gap-2">
+      <% @project.links.each do |link| %>
+        <%= render "shared/link", link: link %>
+      <% end %>
+    </div>
+
+    <h2 class="mt-10 text-2xl font-semibold">Screenshots</h2>
+
+    <div class="mt-4 space-y-6">
+      <% @project.project_images.order(:position).each do |project_image| %>
+        <% if project_image.image.attached? %>
+          <div>
+            <%= image_tag project_image.image, class: "w-full max-w-4xl rounded-lg" %>
+
+            <p class="mt-2 text-sm text-gray-500">
+              <%= project_image.caption %>
+            </p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
+</div>
