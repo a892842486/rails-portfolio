@@ -49,8 +49,7 @@ class Admin::ProjectsController < ApplicationController
       :description,
       skill_ids: [],
       links_attributes: [ :id, :label, :url, :_destroy ],
-      project_images_attributes: [ :id, :caption, :position, :_destroy ],
-      images: []
+      project_images_attributes: [ :id, :caption, :image, :_destroy ]
       )
   end
 end
