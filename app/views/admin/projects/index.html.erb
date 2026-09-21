@@ -9,6 +9,12 @@
       <p><%= project.summary %></p>
       <p><%= project.description %></p>
 
+      <% cover_image = project.project_images.order(:created_at).first %>
+
+      <% if cover_image&.image&.attached? %>
+        <%= image_tag cover_image.image, class: "mt-4 w-full rounded-lg" %>
+      <% end %>
+
       <% project.links.each do |link| %>
         <%= link_to link.label, link.url %>
       <% end %>
