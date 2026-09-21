@@ -12,7 +12,7 @@
     <h2 class="mt-10 text-2xl font-semibold">About this project</h2>
 
     <p class="mt-8 max-w-3xl text-gray-700 leading-7">
-      <%= @project.description %>
+      <%= simple_format(@project.description) %>
     </p>
 
     <h2 class="mt-10 text-2xl font-semibold">Skills</h2>
@@ -31,24 +31,26 @@
       <% end %>
     </div>
 
-    <h2 class="mt-10 text-2xl font-semibold">Screenshots</h2>
+    <% if @project.project_images.any? %>
+      <h2 class="mt-10 text-2xl font-semibold">Project Screenshots</h2>
 
-    <div class="mt-6 space-y-10">
-      <% @project.project_images.order(:created_at).each do |project_image| %>
-        <% if project_image.image.attached? %>
-          <div>
-            <%= image_tag project_image.image,
-                          class: "w-full max-w-2xl rounded-xl shadow-sm" %>
+      <div class="mt-6 space-y-10">
+        <% @project.project_images.order(:created_at).each do |project_image| %>
+          <% if project_image.image.attached? %>
+            <div>
+              <%= image_tag project_image.image,
+                            class: "w-full max-w-3xl rounded-xl shadow-sm" %>
 
-            <% if project_image.caption.present? %>
-              <p class="mt-3 text-sm text-gray-500">
-                <%= project_image.caption %>
-              </p>
-            <% end %>
-          </div>
+              <% if project_image.caption.present? %>
+                <p class="mt-3 text-sm text-gray-500">
+                  <%= project_image.caption %>
+                </p>
+              <% end %>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
     </div>
-
+    
+    <% end %>
   </div>
 </div>
